@@ -1,7 +1,21 @@
+using System.Text;
+
 static class Badge
 {
     public static string Print(int? id, string name, string? department)
     {
-        throw new NotImplementedException("Please implement the (static) Badge.Print() method");
+        StringBuilder result = new StringBuilder();
+
+        if (id != null)
+            result.Append($"[{id}] - ");
+
+        result.Append($"{name} - ");
+
+        if (department == null)
+            result.Append("OWNER");
+        else
+            result.Append($"{department.ToUpper()}");
+
+        return result.ToString();
     }
 }
