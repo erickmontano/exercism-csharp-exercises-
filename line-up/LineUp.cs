@@ -7,21 +7,12 @@ public static class LineUp
         if (number > 999 || number <= 0)
             throw new ArgumentOutOfRangeException($"The number '{number}' is invalid.");
 
-        switch (number % 100)  // check last two digits first
+        return (number % 10) switch
         {
-            case 11:
-            case 12:
-            case 13:
-                return "th";
-            default:
-                return (number % 10) switch  // then check last digit
-                {
-                    1 => "st",
-                    2 => "nd",
-                    3 => "rd",
-                    _ => "th"
-                };
-        }
+            1 when number % 100 != 11 => "st",
+            2 when number % 100 != 12 => "nd",
+            3 when number % 100 != 13 => "rd",
+            _ => "th",
+        };
     }
-
 }
