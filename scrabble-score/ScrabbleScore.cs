@@ -7,13 +7,6 @@ public static class ScrabbleScore
         ['Y'] = 4, ['K'] = 5, ['J'] = 8, ['X'] = 8, ['Q'] = 10, ['Z'] = 10,
     };
 
-    public static int Score(string input)
-    {
-        int result = 0;
-        foreach (char c in input.ToUpper())
-        {
-            result += letterScores.GetValueOrDefault(c, 0);
-        }
-        return result;
-    }
+    public static int Score(string input) => input.ToUpper().Sum(c => letterScores.GetValueOrDefault(c, 0));
+    
 }
