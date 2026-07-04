@@ -1,12 +1,8 @@
 public class Player
 {
-    public int RollDie()
-    {
-        throw new NotImplementedException("Please implement the Player.RollDie() method");
-    }
+    private Random _die = new Random();
 
-    public double GenerateSpellStrength()
-    {
-        throw new NotImplementedException("Please implement the Player.GenerateSpellStrength() method");
-    }
+    public int RollDie() => _die.Next(1, 19);//18 sided die 
+
+    public double GenerateSpellStrength() => _die.NextDouble() * 100;
 }
