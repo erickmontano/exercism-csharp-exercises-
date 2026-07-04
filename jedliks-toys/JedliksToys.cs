@@ -1,22 +1,25 @@
 class RemoteControlCar
 {
-    public static RemoteControlCar Buy()
-    {
-        throw new NotImplementedException("Please implement the (static) RemoteControlCar.Buy() method");
-    }
+    private int _totalDistance;
+    private int _batteryCharge;
 
-    public string DistanceDisplay()
+    public RemoteControlCar()
     {
-        throw new NotImplementedException("Please implement the RemoteControlCar.DistanceDisplay() method");
+        _totalDistance = 0;
+        _batteryCharge = 100;
     }
+    public static RemoteControlCar Buy() => new();
+    
+    public string DistanceDisplay() => $"Driven {_totalDistance} meters";
 
-    public string BatteryDisplay()
-    {
-        throw new NotImplementedException("Please implement the RemoteControlCar.BatteryDisplay() method");
-    }
+    public string BatteryDisplay() => (_batteryCharge != 0) ? $"Battery at {_batteryCharge}%" : "Battery empty";
 
     public void Drive()
     {
-        throw new NotImplementedException("Please implement the RemoteControlCar.Drive() method");
+        if (_batteryCharge > 0)
+        {
+            _totalDistance += 20;
+            _batteryCharge -= 1;
+        }
     }
 }
