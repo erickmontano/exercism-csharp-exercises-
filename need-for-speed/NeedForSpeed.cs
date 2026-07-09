@@ -1,34 +1,54 @@
 class RemoteControlCar
 {
-    // TODO: define the constructor for the 'RemoteControlCar' class
-
-    public bool BatteryDrained()
+    public int BatteryDrain { get; init; }
+    public int Battery
     {
-        throw new NotImplementedException("Please implement the RemoteControlCar.BatteryDrained() method");
+        get { return _battery; }
+        set{ if (value >= 0) _battery = value; }
+    }
+    private int _battery;
+    public int Speed { get; init; }//Speed in Meters
+    private int DistanceTraveled { get; set; }//Distance Traveled in Meters
+
+    public RemoteControlCar(int speed, int batteryDrain, int battery = 100)
+    {
+        BatteryDrain = batteryDrain;
+        Speed = speed;
+        Battery = battery;
+        DistanceTraveled = 0;
     }
 
-    public int DistanceDriven()
-    {
-        throw new NotImplementedException("Please implement the RemoteControlCar.DistanceDriven() method");
-    }
+    public bool BatteryDrained() => Battery < BatteryDrain;
+
+    public int DistanceDriven() => DistanceTraveled;
 
     public void Drive()
     {
-        throw new NotImplementedException("Please implement the RemoteControlCar.Drive() method");
+        if (!BatteryDrained())
+        {
+            DistanceTraveled += Speed;
+            Battery -= BatteryDrain;
+        }
     }
-
-    public static RemoteControlCar Nitro()
-    {
-        throw new NotImplementedException("Please implement the (static) RemoteControlCar.Nitro() method");
-    }
+    public static RemoteControlCar Nitro() => new RemoteControlCar(speed: 50, batteryDrain: 4);
 }
 
 class RaceTrack
 {
-    // TODO: define the constructor for the 'RaceTrack' class
+    public int TrackDistance { get; init; }
+    public RaceTrack(int distance)
+    {
+        TrackDistance = distance;
+    }
 
     public bool TryFinishTrack(RemoteControlCar car)
     {
-        throw new NotImplementedException("Please implement the RaceTrack.TryFinishTrack() method");
+        while (!car.BatteryDrained())
+        {
+            car.Drive();
+            if (car.DistanceDriven() >= TrackDistance)
+                return true;
+        };
+        return false;
     }
 }
