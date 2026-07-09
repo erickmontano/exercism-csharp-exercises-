@@ -1,7 +1,7 @@
 class RemoteControlCar
 {
     public int BatteryDrain { get; init; }
-    public int Battery
+    private int Battery
     {
         get { return _battery; }
         set{ if (value >= 0) _battery = value; }
