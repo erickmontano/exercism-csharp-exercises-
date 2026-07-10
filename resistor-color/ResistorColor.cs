@@ -1,12 +1,20 @@
 public static class ResistorColor
 {
-    public static int ColorCode(string color)
+    private static readonly Dictionary<string, int> resisitorColorValues = new()
     {
-        throw new NotImplementedException("You need to implement this method.");
-    }
+        {"black", 0 },
+        {"brown", 1},
+        {"red", 2},
+        {"orange", 3},
+        {"yellow", 4},
+        {"green", 5},
+        {"blue", 6},
+        {"violet", 7},
+        {"grey", 8},
+        {"white", 9},
+    };
 
-    public static string[] Colors()
-    {
-        throw new NotImplementedException("You need to implement this method.");
-    }
+    public static int ColorCode(string color) => resisitorColorValues.GetValueOrDefault(color.ToLower());
+
+    public static string[] Colors() => resisitorColorValues.Keys.ToArray();
 }
