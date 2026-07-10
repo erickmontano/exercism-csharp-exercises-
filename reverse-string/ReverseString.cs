@@ -1,7 +1,16 @@
+using System.Text;
+
 public static class ReverseString
 {
     public static string Reverse(string input)
     {
-        throw new NotImplementedException("You need to implement this method.");
+        StringBuilder stringBuilder = new();
+
+        for (int i = input.Length - 1; i >= 0; i--)
+        {
+            stringBuilder.Append(input[i]);
+        }
+
+        return stringBuilder.ToString();
     }
 }
