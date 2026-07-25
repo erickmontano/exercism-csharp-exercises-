@@ -1,20 +1,35 @@
 public class SpaceAge
 {
-    public double seconds { get; set; }
+    public double Seconds { get; init; }
 
-    private const int earthYearsInSeconds = 31557600;
+    private const int EarthYearsInSeconds = 31557600;
 
-    public SpaceAge(int seconds)
+    private enum Planet
     {
-        this.seconds = seconds;
+        Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune
     }
 
-    public double OnEarth() => seconds / earthYearsInSeconds;
-    public double OnMercury() => OnEarth() / 0.2408467;
-    public double OnVenus() => OnEarth() / 0.61519726;
-    public double OnMars() => OnEarth() / 1.8808158;
-    public double OnJupiter() => OnEarth() / 11.862615;
-    public double OnSaturn() => OnEarth() / 29.447498;
-    public double OnUranus() => OnEarth() / 84.016846;
-    public double OnNeptune() => OnEarth() / 164.79132;
+    private static readonly Dictionary<Planet, double> OrbitalPeriodInEarthYears = new()
+    {             
+        { Planet.Mercury, 0.2408467 },
+        { Planet.Venus, 0.61519726 },
+        { Planet.Mars, 1.8808158 },
+        { Planet.Jupiter, 11.862615 },
+        { Planet.Saturn, 29.447498 },
+        { Planet.Uranus, 84.016846 },
+        { Planet.Neptune, 164.79132 },
+    };
+
+    public SpaceAge(int seconds) => Seconds = seconds;
+
+    private double CalculateAge(Planet planet) => OnEarth() / OrbitalPeriodInEarthYears[planet];
+
+    public double OnEarth() => Seconds / EarthYearsInSeconds;
+    public double OnMercury() => CalculateAge(Planet.Mercury);
+    public double OnVenus() => CalculateAge(Planet.Venus);
+    public double OnMars() => CalculateAge(Planet.Mars);
+    public double OnJupiter() => CalculateAge(Planet.Jupiter);
+    public double OnSaturn() => CalculateAge(Planet.Saturn);
+    public double OnUranus() => CalculateAge(Planet.Uranus);
+    public double OnNeptune() => CalculateAge(Planet.Neptune);
 }
